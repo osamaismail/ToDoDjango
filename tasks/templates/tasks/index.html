@@ -506,6 +506,12 @@
   </head>
 
   <body>
+    <br>
+    <div class="container">
+      <h3>Welcome {{user}}</h3>
+      <p> <a href="{% url 'account_logout' %}">Logout</a></p>
+    </div>
+    <br>
     <div class="page-content page-container" id="page-content">
         <div class="padding">
             <div class="row container d-flex justify-content-center">
@@ -552,7 +558,10 @@
                                         </div>
                                         <a href="{% url 'delete' l.id %}" class="remove mdi mdi-close-circle-outline"></a>
                                     </li>
+
                                     {% endif %}
+                                    {% empty %}
+                                    <li>No Tasks for today</li>
                                     {% endfor %}
                                 </ul>
                             </div>

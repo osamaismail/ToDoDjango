@@ -1,18 +1,21 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . models import Task
+from django.contrib.auth.decorators import login_required
 from . forms import *
 
 
 
-
+@login_required
 def home(request):
-    lis = Task.objects.filter(deleted=False)
+    lis = Task.objects.filter(deleted=False, user = request.user)
     form = TaskForm()
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
+            new = form.save(commit=False)
+            new.user = request.user
+            new.save()
             return redirect('/')
 
     context = {'lis':lis, 'form':form}
