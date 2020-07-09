@@ -1,0 +1,22 @@
+<h3>ToDo List</h3>
+
+<form method="POST">
+  {% csrf_token %}
+  {{form.title}}
+  <input type="submit" value="Add">
+</form>
+
+{% for l in lis %}
+  {% if l.completed %}
+    <div class="">
+      <p> <strike> {{l}} </strike> </p>
+    </div>
+  {% else %}
+    <div class="">
+      <a href="{% url 'update' l.id %}">Update</a>
+      <a href="{% url 'delete' l.id %}">Delete</a>
+      <a href="{% url 'complete' l.id %}">Complete</a>
+      <p>{{l}}</p>
+    </div>
+  {% endif %}
+{% endfor %}

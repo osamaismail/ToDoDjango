@@ -1,0 +1,16 @@
+<h4>This is <strong>{{single.title}}</strong> Task</h4>
+<br><br><br>
+<div class="">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="">
+      Task:
+      <p>{{form.title}}</p>
+    </div>
+    <div class="">
+      <p>Complete: {{form.completed}}</p>
+    </div>
+    <input type="submit" value="Update Task">
+  </form>
+  <a class="" href="{% url 'home' %}">Cancel</a>
+</div>
